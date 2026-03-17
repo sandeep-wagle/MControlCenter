@@ -13,7 +13,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_compile_options(-fPIC)
 
-find_package(Qt6 6.4 REQUIRED COMPONENTS Core DBus)
+find_package(Qt6 6.2 REQUIRED COMPONENTS Core DBus)
 
 add_executable(mcontrolcenter-helper
   helper.h

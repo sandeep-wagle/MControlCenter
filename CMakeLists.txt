@@ -13,7 +13,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_compile_options(-fPIC)
 
-find_package(Qt6 6.4 REQUIRED COMPONENTS Widgets LinguistTools DBus)
+find_package(Qt6 6.2 REQUIRED COMPONENTS Widgets LinguistTools DBus)
 
 set(PROJECT_SOURCES
     src/main.cpp
@@ -45,23 +45,7 @@ set(TS_FILES
     MControlCenter_zh_CN.ts
 )
 
-find_program(LUPDATE_EXECUTABLE lupdate lupdate6 lupdate-qt6 PATHS /lib/qt6/bin/ REQUIRED)
-find_program(LRELEASE_EXECUTABLE lrelease lrelease6 lrelease-qt6 PATHS /lib/qt6/bin/ REQUIRED)
-
-foreach(_ts_file ${TS_FILES})
-    execute_process(COMMAND
-        ${LUPDATE_EXECUTABLE}
-        ${CMAKE_SOURCE_DIR}
-        -ts ${CMAKE_SOURCE_DIR}/src/i18n/${_ts_file}
-        -source-language en_US -no-obsolete -locations none
-        COMMAND_ERROR_IS_FATAL ANY
-    )
-    execute_process(COMMAND
-        ${LRELEASE_EXECUTABLE}
-        ${CMAKE_SOURCE_DIR}/src/i18n/${_ts_file}
-        COMMAND_ERROR_IS_FATAL ANY
-    )
-endforeach()
+message(STATUS "Skipping runtime translation generation during configure")
 if(Qt6_FOUND)
     qt_add_executable(mcontrolcenter
         MANUAL_FINALIZATION
